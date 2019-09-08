@@ -1,4 +1,4 @@
 import { createStore } from "reux";
-import {rootReducer} from './rootReducer'
+import {rootReducer} from './Reducers'
 
 export default createStore(rootReducer)
