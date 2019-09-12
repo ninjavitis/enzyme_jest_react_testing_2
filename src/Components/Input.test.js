@@ -16,3 +16,16 @@ test('it renders', ()=>{
 test ('does not throw warning with expected props',()=>{
   checkProps(Input, {secretWord: ''})
 })
+
+describe('state controlled input field', ()=>{
+  const mockSetCurrentGuesst = jest.fn()
+  React.useState = jest.fn(() => ["", mockSetCurrentGuesst])
+
+  const wrapper = setup()
+  const inputBox = findByTestAttr(wrapper, 'input-box')
+
+  const mockEvent = {target: {value: 'train'}}
+  inputBox.simulate("change", mockEvent)
+
+  expect(mockSetCurrentGuesst).toHaveBeenCalledWith('train')
+})
