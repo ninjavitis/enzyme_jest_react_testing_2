@@ -26,6 +26,13 @@ describe('',()=>{
     setup()
     expect(mockGetSecretWord).toHaveBeenCalled()
   })
+  test('that secretWord does not update on app update',()=>{
+    const wrapper = setup()
+    mockGetSecretWord.mockClear()
+
+    wrapper.setProps()
+    expect(mockGetSecretWord).not.toHaveBeenCalled()
+  })
   //test('',()=>{expect()})
 
 })
