@@ -3,6 +3,8 @@ import HookActions from './Actions/HookActions'
 import GuessedWords from './GuessedWords'
 import Congrats from './Congrats'
 
+import Input from './Components/Input'
+
 function reducer(state, action){
   switch(action.type){
     case "setSecretWord":
@@ -23,13 +25,21 @@ function App() {
     HookActions.getSecretWord(setSecretWord)
   },[])
 
-  return (
-    <div data-test="component-app" className="App">
-      <h1>Jotto</h1>
-      <Congrats success={false} />
-      <GuessedWords guessedWords={[]} />
-    </div>
-  );
+  if (!state.secretWord){
+    return(
+      <div data-test="spinner">
+        This is a spinner
+      </div>
+    )
+  }
+    return (
+      <div data-test="component-app" className="App">
+        <h1>Jotto</h1>
+        <Input secretWord={state.secretWord} />
+        <Congrats success={false} />
+        <GuessedWords guessedWords={[]} />
+      </div>
+    );
 }
 
 export default App;
